@@ -2,7 +2,8 @@ import os
 from time import sleep
 
 from infi.systray import SysTrayIcon
-import virtualbox
+from virtualbox import VirtualBox
+from virtualbox.library import MachineState
 
 run = True
 
@@ -13,8 +14,8 @@ def on_quit_callback(systray):
 
 
 def running_vagrant_boxes():
-    vbox = virtualbox.VirtualBox()
-    return [vm.name for vm in vbox.machines]
+    vbox = VirtualBox()
+    return [vm.name for vm in vbox.machines if vm.state == MachineState(5)]
 
 
 if __name__ == "__main__":
